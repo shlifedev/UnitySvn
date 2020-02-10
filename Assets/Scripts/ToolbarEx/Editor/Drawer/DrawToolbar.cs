@@ -18,7 +18,7 @@ namespace UnityToolbarExtender
 
     public class DrawToolBarConfig
     {
-        public enum MODE { DEFAULT, DEBUG_VIEW }
+        public enum MODE { DEFAULT, SVN }
         public static MODE mode;
     }
     public class DrawToolBarRightConfig
@@ -299,27 +299,27 @@ namespace UnityToolbarExtender
                 fontStyle: FontStyle.Normal); 
             if (DrawToolBarConfig.mode == DrawToolBarConfig.MODE.DEFAULT)
             {
-                DrawButton("SVN 관리", "폴더 밖으로 나가지 않고도 svn을 업데이트 받거나 커밋할 수 있습니다! :D", GUIStyleManager.GetCustomStyle(80, btnTexture: GUIStyleManager.ui_red_bt, fontStyle: FontStyle.Normal), () =>
+                DrawButton("Svn", ":D", GUIStyleManager.GetCustomStyle(80, btnTexture: GUIStyleManager.ui_red_bt, fontStyle: FontStyle.Normal), () =>
                 {
  
                     if (DrawToolbar.enabled_ == false)
                     {
-                        var v = EditorUtility.DisplayDialog("Warning!",
-                            "해당기능을 키면 폴더까지 가서 SVN 업데이트&커밋을 받을 필요없이 유니티 안에서도 SVN 업데이트 & 커밋을 편리하게 진행 할 수 있습니다. ",
-                            "네.", "괜찮아요.");
+                        var v = EditorUtility.DisplayDialog("svn",
+                            "Turn on svn manager?",
+                            "yes", "no");
 
                         if (v)
                         {
                             EditorUtility.DisplayDialog("Ok!",
-                                "SVN매니저가 활성화 되었습니다.",
-                                "네.");
-                            DrawToolBarConfig.mode = DrawToolBarConfig.MODE.DEBUG_VIEW;
+                                "enabled svn manager!",
+                                "happy!");
+                            DrawToolBarConfig.mode = DrawToolBarConfig.MODE.SVN;
                             PerformAction(true);
                         }
                         return;
                     }
 
-                    DrawToolBarConfig.mode = DrawToolBarConfig.MODE.DEBUG_VIEW;
+                    DrawToolBarConfig.mode = DrawToolBarConfig.MODE.SVN;
                 });
             }
 
@@ -328,7 +328,7 @@ namespace UnityToolbarExtender
 
         static void DrawUIDebugView()
         { 
-            if (DrawToolBarConfig.mode == DrawToolBarConfig.MODE.DEBUG_VIEW)
+            if (DrawToolBarConfig.mode == DrawToolBarConfig.MODE.SVN)
             {
                 draw_debug_view.Draw();
             } 
